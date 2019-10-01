@@ -12,23 +12,16 @@ const winningCombi = [
 let currentPlayer = "X";
 let turns = 0;
 
-// Select the container that contains the grids
-let gridContainer = document.getElementsByClassName("grid-container")[0];
+function generateGrids() {
+  // Select the container that contains the grids
+  let gridContainer = document.getElementsByClassName("grid-container")[0];
 
-// Programmatically append grids into the container
-for (let i = 0; i < 9; i++) {
-  // Pass in the event by passing in 'event' or the DOMElement itself by passing in 'this'
-  gridContainer.innerHTML += `<div class="grid-item" id="${i}" onclick="getGridPosition(event)" ></div>`;
+  // Programmatically append grids into the container
+  for (let i = 0; i < 9; i++) {
+    // Pass in the event by passing in 'event' or the DOMElement itself by passing in 'this'
+    gridContainer.innerHTML += `<div class="grid-item" id="${i}" onclick="insertMarker(event)" ></div>`;
+  }
 }
-
-// Handles click
-const getGridPosition = e => {
-  // Get the id of the element
-  console.log(e.target.id);
-  console.log(e.target.innerHTML);
-
-  checkIfGridIsEmpty(e.target, "X");
-};
 
 // Toggle user
 const changePlayer = turns => {
@@ -46,7 +39,6 @@ const checkWin = () => {
 // Check if the grid is taken
 const checkIfGridIsEmpty = (grid, currentPlayer) => {
   if (grid.innerHTML === "") {
-    grid.innerHTML = currentPlayer;
     return true;
   } else {
     alert("CHOOOOOSE SOMEWHERE ELSE OIE");
@@ -54,4 +46,13 @@ const checkIfGridIsEmpty = (grid, currentPlayer) => {
   }
 };
 
-// Insert the marker into the grid
+// Handles click
+const insertMarker = (e, currentPlayer) => {
+  // Get the id of the element
+  console.log(e.target.id);
+  console.log(e.target.innerHTML);
+
+  if (checkIfGridIsEmpty(e.target, currentPlayer)) {
+    e.target.innerHTML = currentPlayer;
+  }
+};
