@@ -38,6 +38,7 @@ const checkIfGridIsEmpty = grid => {
   }
 };
 
+// Insert the current player's marker
 const insertMarker = (e, currentPlayer) => {
   e.target.innerHTML = currentPlayer;
 };
@@ -65,13 +66,13 @@ const checkWin = () => {
 
 // Start new game
 function startGame() {
-  // Set player
   // Select all the grids in the board
   let grids = document.querySelectorAll(".grid-item");
 
   for (let i = 0; i < grids.length; i++) {
     grids[i].addEventListener("click", () => {
       handleClick(event);
+      // Play some tune onclick
     });
   }
 }
