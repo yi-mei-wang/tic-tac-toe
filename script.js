@@ -1,3 +1,15 @@
+window.onload = () => {
+  // Generate the grids on page load
+  // Select the container that contains the grids
+  let gridContainer = document.getElementsByClassName("game-board")[0];
+
+  // Programmatically append grids into the container
+  for (let i = 0; i < 9; i++) {
+    // Pass in the event by passing in 'event' or the DOMElement itself by passing in 'this'
+    gridContainer.innerHTML += `<div class="grid-item" id="${i}" ></div>`;
+  }
+};
+
 const winningCombi = [
   [0, 1, 2],
   [3, 4, 5],
@@ -9,22 +21,10 @@ const winningCombi = [
   [2, 4, 6]
 ];
 
-let currentPlayer = "X";
-let turns = 0;
+const players = ["O", "X"];
 
-function generateGrids() {
-  // Select the container that contains the grids
-  let gridContainer = document.getElementsByClassName("grid-container")[0];
-
-  // Programmatically append grids into the container
-  for (let i = 0; i < 9; i++) {
-    // Pass in the event by passing in 'event' or the DOMElement itself by passing in 'this'
-    gridContainer.innerHTML += `<div class="grid-item" id="${i}" onclick="insertMarker(event)" ></div>`;
-  }
-}
-
-// Toggle user
-const changePlayer = turns => {
+// Switch player so they take turns
+const switchPlayer = (turns, currentPlayer) => {
   currentPlayer = turns % 2 ? "X" : "O";
   turns++;
   return turns, currentPlayer;
@@ -37,7 +37,7 @@ const checkWin = () => {
 };
 
 // Check if the grid is taken
-const checkIfGridIsEmpty = (grid, currentPlayer) => {
+const checkIfGridIsEmpty = grid => {
   if (grid.innerHTML === "") {
     return true;
   } else {
@@ -46,13 +46,23 @@ const checkIfGridIsEmpty = (grid, currentPlayer) => {
   }
 };
 
-// Handles click
 const insertMarker = (e, currentPlayer) => {
-  // Get the id of the element
-  console.log(e.target.id);
-  console.log(e.target.innerHTML);
+  e.target.innerHTML = currentPlayer;
+};
 
-  if (checkIfGridIsEmpty(e.target, currentPlayer)) {
-    e.target.innerHTML = currentPlayer;
+// Handles click
+const handleClick = (e, currentPlayer, turns) => {
+  if (checkIfGridIsEmpty(e.target)) {
+    insertMarker(e, currentPlayer);
+    switchPlayer(turns, currentPlayer);
   }
 };
+
+// Start new game
+function startGame() {
+  let turns = 0;
+  // Set player
+  let currentPlayer = players[Math.floor(Math.random() * 2)];
+  // Select all the grids in the board
+  let grids = document.querySelectorAll(".grid-item");
+}
