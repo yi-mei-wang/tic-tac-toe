@@ -8,6 +8,7 @@ window.onload = () => {
     // Pass in the event by passing in 'event' or the DOMElement itself by passing in 'this'
     gridContainer.innerHTML += `<div class="grid-item" id="${i}" ></div>`;
   }
+  startGame();
 };
 
 const winningCombi = [
@@ -23,18 +24,9 @@ const winningCombi = [
 
 const players = ["O", "X"];
 
-// Switch player so they take turns
-const switchPlayer = (turns, currentPlayer) => {
-  currentPlayer = turns % 2 ? "X" : "O";
-  turns++;
-  return turns, currentPlayer;
-};
-
-// Continue game as long as there is no winner
-const checkWin = () => {
-  // Check if there is a winner
-  // Compare current board position with the list of winning combinations
-};
+// GLOBAL SCOPE
+let turns = 0;
+let currentPlayer = players[Math.floor(Math.random() * 2)];
 
 // Check if the grid is taken
 const checkIfGridIsEmpty = grid => {
@@ -50,29 +42,36 @@ const insertMarker = (e, currentPlayer) => {
   e.target.innerHTML = currentPlayer;
 };
 
+// Switch player so they take turns
+const getCurrentPlayer = () => {
+  currentPlayer = turns % 2 === 0 ? "X" : "O";
+  console.log(currentPlayer);
+  return currentPlayer;
+};
+
 // Handles click
-const handleClick = (e, currentPlayer, turns) => {
+const handleClick = e => {
   if (checkIfGridIsEmpty(e.target)) {
-    insertMarker(e, currentPlayer);
-    switchPlayer(turns, currentPlayer);
+    insertMarker(e, getCurrentPlayer());
     turns++;
   }
 };
 
+// Continue game as long as there is no winner
+const checkWin = () => {
+  // Check if there is a winner
+  // Compare current board position with the list of winning combinations
+};
+
 // Start new game
 function startGame() {
-  let turns = 0;
   // Set player
-  let currentPlayer = players[Math.floor(Math.random() * 2)];
   // Select all the grids in the board
   let grids = document.querySelectorAll(".grid-item");
 
   for (let i = 0; i < grids.length; i++) {
-    console.log(i);
     grids[i].addEventListener("click", () => {
-      handleClick(currentPlayer, turns);
+      handleClick(event);
     });
   }
 }
-
-startGame();
