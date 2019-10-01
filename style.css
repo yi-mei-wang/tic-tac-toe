@@ -2,7 +2,7 @@
   width: 100vw;
 }
 
-.grid-container {
+.game-board {
   display: grid;
   /* grid-template-columns: repeat(3, 1fr); */
   grid-template-columns: auto auto auto;
