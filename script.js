@@ -55,6 +55,7 @@ const handleClick = (e, currentPlayer, turns) => {
   if (checkIfGridIsEmpty(e.target)) {
     insertMarker(e, currentPlayer);
     switchPlayer(turns, currentPlayer);
+    turns++;
   }
 };
 
@@ -65,4 +66,13 @@ function startGame() {
   let currentPlayer = players[Math.floor(Math.random() * 2)];
   // Select all the grids in the board
   let grids = document.querySelectorAll(".grid-item");
+
+  for (let i = 0; i < grids.length; i++) {
+    console.log(i);
+    grids[i].addEventListener("click", () => {
+      handleClick(currentPlayer, turns);
+    });
+  }
 }
+
+startGame();
