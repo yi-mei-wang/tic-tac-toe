@@ -8,13 +8,14 @@
   grid-template-columns: auto auto auto;
   margin: 0 auto;
   width: 25vw;
-  min-width: 300px;
+  min-width: 250px;
+  min-height: 250px;
 }
 
 .grid-item {
   border: 1px solid black;
-  width: 100px;
-  height: 100px;
-  background-color: rgba(0, 0, 0, 0.5);
+  max-width: 100px;
+  max-height: 100px;
+  background-color: rgba(10, 140, 120, 0.5);
   box-sizing: border-box;
 }
