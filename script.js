@@ -6,29 +6,29 @@ window.onload = () => {
   // Programmatically append grids into the container
   for (let i = 0; i < 9; i++) {
     // Pass in the event by passing in 'event' or the DOMElement itself by passing in 'this'
-    gridContainer.innerHTML += `<div class="grid-item" id="${i}" ></div>`;
+    // gridContainer.innerHTML += `<div class="grid-item" id="${i}" ></div>`;
 
     let grid = document.createElement("div");
     grid.classList.add("grid-item");
     grid.id = i;
-    gridContainer.appendChild(grid);
     grid.addEventListener("click", () => {
       handleClick(event);
       // Play some tune onclick
     });
+    gridContainer.appendChild(grid);
   }
   startGame();
 };
 
 const winningCombi = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6]
+  ["0", "1", "2"],
+  ["3", "4", "5"],
+  ["6", "7", "8"],
+  ["0", "3", "6"],
+  ["1", "4", "7"],
+  ["2", "5", "8"],
+  ["0", "4", "8"],
+  ["2", "4", "6"]
 ];
 
 const players = ["O", "X"];
@@ -60,6 +60,7 @@ const checkIfGridIsEmpty = grid => {
 const insertMarker = (e, currentPlayer) => {
   e.target.innerHTML = currentPlayer;
   // Keep track of the current configuration
+  gameState[currentPlayer].push(e.target.id);
 };
 
 // Switch player so they take turns
