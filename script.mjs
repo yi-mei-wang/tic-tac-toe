@@ -1,5 +1,11 @@
-import { winningCombi, players } from "./constants.mjs";
-import { changeDisplayMessage, changeToRestartButton } from "./gameHelpers.mjs";
+import { players } from "./constants.mjs";
+import {
+  changeDisplayMessage,
+  changeToRestartButton,
+  checkIfGridIsEmpty,
+  checkWin,
+  insertMarker
+} from "./gameHelpers.mjs";
 
 window.onload = () => {
   // Generate the grids on page load
@@ -41,26 +47,6 @@ const setUp = () => {
   }
 };
 
-// Check if the grid is taken
-const checkIfGridIsEmpty = grid => {
-  if (grid.innerHTML === "") {
-    return true;
-  } else {
-    changeDisplayMessage(
-      "#game-announcement-message",
-      "CHOOOOOSE SOMEWHERE ELSE OIE"
-    );
-    return false;
-  }
-};
-
-// Insert the current player's marker
-const insertMarker = (e, currentPlayer) => {
-  e.target.innerHTML = currentPlayer;
-  // Keep track of the current configuration
-  gameState[currentPlayer].push(e.target.id);
-};
-
 // Switch player so they take turns
 const getCurrentPlayer = () => {
   currentPlayer = turns % 2 === 0 ? "X" : "O";
@@ -74,36 +60,27 @@ const handleClick = e => {
   if (gameOngoing) {
     if (checkIfGridIsEmpty(e.target)) {
       let currentPlayer = getCurrentPlayer();
-      insertMarker(e, currentPlayer);
-      changeDisplayMessage(`It's ${currentPlayer}'s turn!`);
+
+      insertMarker(e, currentPlayer, gameState);
+
       turns++;
-      if (checkWin()) {
+      changeDisplayMessage(
+        "#current-player",
+        `It's ${getCurrentPlayer()}'s turn!`
+      );
+
+      if (checkWin(gameState, currentPlayer)) {
         gameOngoing = false;
-        changeDisplayMessage("i am a winnah");
+
+        changeDisplayMessage("#game-announcement-message", "i am a winnah");
       } else if (turns === 9) {
         gameOngoing = false;
-        changeDisplayMessage("no");
+
+        changeDisplayMessage("#game-announcement-message", "no");
       }
     }
   }
 };
-
-// Continue game as long as there is no winner
-const checkWin = () => {
-  // Check if there is a winner
-  // Compare current board position with the list of winning combinations
-  for (let i = 0; i < winningCombi.length; i++) {
-    if (
-      JSON.stringify(gameState[currentPlayer].sort()) ===
-      JSON.stringify(winningCombi[i])
-    ) {
-      return true;
-    }
-  }
-  return false;
-};
-
-
 
 // Start new game
 function startGame() {

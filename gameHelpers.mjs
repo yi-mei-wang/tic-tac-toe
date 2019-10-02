@@ -1,3 +1,5 @@
+import { winningCombi } from "./constants.mjs";
+
 export const changeDisplayMessage = (elem, msg) => {
   document.querySelector(elem).innerHTML = msg;
 };
@@ -48,4 +50,25 @@ export const insertMarker = (e, currentPlayer, gameState) => {
   e.target.innerHTML = currentPlayer;
   // Keep track of the current configuration
   gameState[currentPlayer].push(e.target.id);
+};
+
+export const checkWin = (gameState, currentPlayer) => {
+  // Check if there is a winner
+  // Compare current board position with the list of winning combinations
+  if (gameState[currentPlayer].length >= 3) {
+    for (let i = 0; i < winningCombi.length; i++) {
+      console.log(JSON.stringify(gameState[currentPlayer].sort()));
+
+      if (
+        JSON.stringify(
+          winningCombi[i].includes(
+            JSON.stringify(gameState[currentPlayer].sort())
+          )
+        )
+      ) {
+        return true;
+      }
+    }
+  }
+  return false;
 };
