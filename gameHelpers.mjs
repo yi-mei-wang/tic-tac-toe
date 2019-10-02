@@ -29,3 +29,23 @@ const restartGame = () => {
     grids[i].innerHTML = "";
   }
 };
+
+// Check if the grid is taken
+export const checkIfGridIsEmpty = grid => {
+  if (grid.innerHTML === "") {
+    return true;
+  } else {
+    changeDisplayMessage(
+      "#game-announcement-message",
+      "CHOOOOOSE SOMEWHERE ELSE OIE"
+    );
+    return false;
+  }
+};
+
+// Insert the current player's marker
+export const insertMarker = (e, currentPlayer, gameState) => {
+  e.target.innerHTML = currentPlayer;
+  // Keep track of the current configuration
+  gameState[currentPlayer].push(e.target.id);
+};
