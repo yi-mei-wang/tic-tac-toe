@@ -15,22 +15,24 @@
   </head>
   <body>
     <!-- 3X3 grid -->
-    <main class="wrapper">
+    <main class="wrapper m-2">
       <section id="game-announcement-container">
         <h2 id="game-announcement-message"></h2>
       </section>
 
-      <section id="game-board"></section>
+      <div class="container-fluid d-flex justify-content-around">
+        <section id="game-board"></section>
 
-      <section id="sidebar">
-        <div id="gameover"></div>
-        <div id="current-player"></div>
-        <div id="game-control">
-          <button id="start-button">
-            Start Game
-          </button>
-        </div>
-      </section>
+        <section id="sidebar">
+          <div id="gameover"></div>
+          <div id="current-player"></div>
+          <div id="game-control">
+            <button id="start-button">
+              Start Game
+            </button>
+          </div>
+        </section>
+      </div>
     </main>
     <!-- Start game button -->
     <!-- Turn -->
