@@ -17,7 +17,6 @@ window.onload = () => {
     });
     gridContainer.appendChild(grid);
   }
-  startGame();
 };
 
 const winningCombi = [
@@ -72,16 +71,24 @@ const getCurrentPlayer = () => {
 
 // Handles click
 const handleClick = e => {
-  console.log(checkWin);
-  if (!checkWin) {
-    if (checkIfGridIsEmpty(e.target)) {
-      insertMarker(e, getCurrentPlayer());
-      turns++;
+  // if (!checkWin()) {
+  //   if (checkIfGridIsEmpty(e.target)) {
+  //     insertMarker(e, getCurrentPlayer());
+  //     turns++;
+  //   }
+  // } else if (checkWin()) {
+  //   alert("you are a winnah");
+  // } else if (turns === 9) {
+  //   alert("y no werk");
+  // }
+  if (checkIfGridIsEmpty(e.target)) {
+    insertMarker(e, getCurrentPlayer());
+    turns++;
+    if (checkWin()) {
+      alert("i am a winnah");
+    } else if (turns === 9) {
+      alert("no");
     }
-  } else if (turns === 9) {
-    alert("you are a winnah");
-  } else {
-    alert("y no werk");
   }
 };
 
