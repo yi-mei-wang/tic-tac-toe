@@ -36,6 +36,8 @@ const players = ["O", "X"];
 let turns;
 let currentPlayer;
 let gameState = {};
+let gameStarted = false;
+let gameEnded = false;
 
 const setUp = () => {
   turns = 0;
@@ -65,29 +67,24 @@ const insertMarker = (e, currentPlayer) => {
 // Switch player so they take turns
 const getCurrentPlayer = () => {
   currentPlayer = turns % 2 === 0 ? "X" : "O";
-  console.log(currentPlayer);
+  // Update text in current player section
+  document.getElementById("current-player").innerHTML = currentPlayer;
   return currentPlayer;
 };
 
 // Handles click
 const handleClick = e => {
-  // if (!checkWin()) {
-  //   if (checkIfGridIsEmpty(e.target)) {
-  //     insertMarker(e, getCurrentPlayer());
-  //     turns++;
-  //   }
-  // } else if (checkWin()) {
-  //   alert("you are a winnah");
-  // } else if (turns === 9) {
-  //   alert("y no werk");
-  // }
-  if (checkIfGridIsEmpty(e.target)) {
-    insertMarker(e, getCurrentPlayer());
-    turns++;
-    if (checkWin()) {
-      alert("i am a winnah");
-    } else if (turns === 9) {
-      alert("no");
+  if (gameStarted) {
+    if (checkIfGridIsEmpty(e.target)) {
+      insertMarker(e, getCurrentPlayer());
+      turns++;
+      if (checkWin()) {
+        gameEnded = true;
+        alert("i am a winnah");
+      } else if (turns === 9) {
+        gameEnded = true;
+        alert("no");
+      }
     }
   }
 };
@@ -107,6 +104,12 @@ const checkWin = () => {
   return false;
 };
 
+const changeButtonText = () => {
+  if (gameStarted) {
+    document.getElementById("start-button").innerHTML = "Restart Game";
+  }
+};
+
 const resetGame = () => {
   // Reset game by setting turns, currentPlayer and gameState           back to their initial state
   setUp();
@@ -117,4 +120,6 @@ const resetGame = () => {
 function startGame() {
   // Initialise turns, currentPlayer, and gameState
   setUp();
+  gameStarted = true;
+  changeButtonText();
 }
