@@ -72,9 +72,16 @@ const getCurrentPlayer = () => {
 
 // Handles click
 const handleClick = e => {
-  if (checkIfGridIsEmpty(e.target)) {
-    insertMarker(e, getCurrentPlayer());
-    turns++;
+  console.log(checkWin);
+  if (!checkWin) {
+    if (checkIfGridIsEmpty(e.target)) {
+      insertMarker(e, getCurrentPlayer());
+      turns++;
+    }
+  } else if (turns === 9) {
+    alert("you are a winnah");
+  } else {
+    alert("y no werk");
   }
 };
 
@@ -82,6 +89,15 @@ const handleClick = e => {
 const checkWin = () => {
   // Check if there is a winner
   // Compare current board position with the list of winning combinations
+  for (let i = 0; i < winningCombi.length; i++) {
+    if (
+      JSON.stringify(gameState[currentPlayer].sort()) ===
+      JSON.stringify(winningCombi[i])
+    ) {
+      return true;
+    }
+  }
+  return false;
 };
 
 const resetGame = () => {
