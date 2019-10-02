@@ -1,21 +1,22 @@
 .wrapper {
   width: 100vw;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: space-between;
 }
 
 #game-board {
-  display: grid;
-  /* grid-template-columns: repeat(3, 1fr); */
-  grid-template-columns: auto auto auto;
-  margin: 0 auto;
+  display: inline-grid;
+  /* Should change this to something more responsive */
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
   width: 25vw;
   min-width: 250px;
   min-height: 250px;
 }
 
 .grid-item {
-  border: 1px solid black;
+  border: 1px solid white;
   max-width: 100px;
   max-height: 100px;
   background-color: rgba(10, 140, 120, 0.5);
@@ -27,6 +28,7 @@
   height: 500px;
   border: 1px solid black;
   border-radius: 15px;
+  display: inline-block;
 }
 
 #sidebar div {
