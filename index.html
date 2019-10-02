@@ -16,12 +16,17 @@
   <body>
     <!-- 3X3 grid -->
     <main class="wrapper">
-      <section class="game-board"></section>
-      <section class="sidebar">
+      <section id="game-announcement-container">
+        <h2 id="game-announcement-message"></h2>
+      </section>
+
+      <section id="game-board"></section>
+
+      <section id="sidebar">
         <div id="gameover"></div>
         <div id="current-player"></div>
-        <div id="start-game">
-          <button id="start-button" onclick="startGame()">
+        <div id="game-control">
+          <button id="start-button">
             Start Game
           </button>
         </div>
@@ -45,6 +50,7 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-    <script src="script.js"></script>
+    <script src="script.mjs" type="module"></script>
+    <script src="./gameHelpers.mjs" type="module"></script>
   </body>
 </html>
