@@ -1,3 +1,6 @@
+import { winningCombi, players } from "./constants.mjs";
+import { changeDisplayMessage, changeToRestartButton } from "./gameHelpers.mjs";
+
 window.onload = () => {
   // Generate the grids on page load
   // Select the container that contains the grids
@@ -17,20 +20,8 @@ window.onload = () => {
     });
     gridContainer.appendChild(grid);
   }
+  document.getElementById("start-button").addEventListener("click", startGame);
 };
-
-const winningCombi = [
-  ["0", "1", "2"],
-  ["3", "4", "5"],
-  ["6", "7", "8"],
-  ["0", "3", "6"],
-  ["1", "4", "7"],
-  ["2", "5", "8"],
-  ["0", "4", "8"],
-  ["2", "4", "6"]
-];
-
-const players = ["O", "X"];
 
 // GLOBAL SCOPE
 let turns;
@@ -40,8 +31,12 @@ let gameOngoing = false;
 
 const setUp = () => {
   turns = 0;
+
   currentPlayer = players[Math.floor(Math.random() * 2)];
-  for (i in players) {
+
+  changeDisplayMessage("#current-player", currentPlayer);
+
+  for (let i = 0; i < players.length; i++) {
     gameState[players[i]] = [];
   }
 };
@@ -51,7 +46,10 @@ const checkIfGridIsEmpty = grid => {
   if (grid.innerHTML === "") {
     return true;
   } else {
-    changeHeaderMessage("CHOOOOOSE SOMEWHERE ELSE OIE");
+    changeDisplayMessage(
+      "#game-announcement-message",
+      "CHOOOOOSE SOMEWHERE ELSE OIE"
+    );
     return false;
   }
 };
@@ -77,14 +75,14 @@ const handleClick = e => {
     if (checkIfGridIsEmpty(e.target)) {
       let currentPlayer = getCurrentPlayer();
       insertMarker(e, currentPlayer);
-      changeHeaderMessage(`It's ${currentPlayer}'s turn!`);
+      changeDisplayMessage(`It's ${currentPlayer}'s turn!`);
       turns++;
       if (checkWin()) {
         gameOngoing = false;
-        changeHeaderMessage("i am a winnah");
+        changeDisplayMessage("i am a winnah");
       } else if (turns === 9) {
         gameOngoing = false;
-        changeHeaderMessage("no");
+        changeDisplayMessage("no");
       }
     }
   }
@@ -105,35 +103,14 @@ const checkWin = () => {
   return false;
 };
 
-const changeToRestartButton = () => {
-  // Change text to Restart Game when game has started
-  if (gameOngoing) {
-    document.getElementById("start-game").innerHTML =
-      '<button id="restart-button" onclick="restartGame()">Restart Game </button>';
-  }
-};
 
-const restartGame = () => {
-  // Reset game by setting turns, currentPlayer and gameState back to their initial state
-  setUp();
-  changeHeaderMessage("");
-
-  // Individual grids should be blank too
-};
-
-const changeHeaderMessage = msg => {
-  document.getElementById("game-message-header").innerHTML = msg;
-};
-
-const changeSidebarMessage = (elem, msg) => {
-  document.querySelector(elem).innerHTML = msg;
-};
 
 // Start new game
 function startGame() {
   // Initialise turns, currentPlayer, and gameState
   setUp();
   gameOngoing = true;
-  changeToRestartButton();
-  changeHeaderMessage("Game has started!");
+
+  changeToRestartButton(gameOngoing);
+  changeDisplayMessage("#game-announcement-message", "Game has started!");
 }
