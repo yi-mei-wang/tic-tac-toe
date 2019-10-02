@@ -7,6 +7,15 @@ window.onload = () => {
   for (let i = 0; i < 9; i++) {
     // Pass in the event by passing in 'event' or the DOMElement itself by passing in 'this'
     gridContainer.innerHTML += `<div class="grid-item" id="${i}" ></div>`;
+
+    let grid = document.createElement("div");
+    grid.classList.add("grid-item");
+    grid.id = i;
+    gridContainer.appendChild(grid);
+    grid.addEventListener("click", () => {
+      handleClick(event);
+      // Play some tune onclick
+    });
   }
   startGame();
 };
@@ -25,8 +34,17 @@ const winningCombi = [
 const players = ["O", "X"];
 
 // GLOBAL SCOPE
-let turns = 0;
-let currentPlayer = players[Math.floor(Math.random() * 2)];
+let turns;
+let currentPlayer;
+let gameState = {};
+
+const setUp = () => {
+  turns = 0;
+  currentPlayer = players[Math.floor(Math.random() * 2)];
+  for (i in players) {
+    gameState[players[i]] = [];
+  }
+};
 
 // Check if the grid is taken
 const checkIfGridIsEmpty = grid => {
@@ -41,6 +59,7 @@ const checkIfGridIsEmpty = grid => {
 // Insert the current player's marker
 const insertMarker = (e, currentPlayer) => {
   e.target.innerHTML = currentPlayer;
+  // Keep track of the current configuration
 };
 
 // Switch player so they take turns
@@ -64,15 +83,14 @@ const checkWin = () => {
   // Compare current board position with the list of winning combinations
 };
 
+const resetGame = () => {
+  // Reset game by setting turns, currentPlayer and gameState           back to their initial state
+  setUp();
+  // Individual grids should be blank too
+};
+
 // Start new game
 function startGame() {
-  // Select all the grids in the board
-  let grids = document.querySelectorAll(".grid-item");
-
-  for (let i = 0; i < grids.length; i++) {
-    grids[i].addEventListener("click", () => {
-      handleClick(event);
-      // Play some tune onclick
-    });
-  }
+  // Initialise turns, currentPlayer, and gameState
+  setUp();
 }
