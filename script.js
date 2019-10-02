@@ -1,7 +1,7 @@
 window.onload = () => {
   // Generate the grids on page load
   // Select the container that contains the grids
-  let gridContainer = document.getElementsByClassName("game-board")[0];
+  let gridContainer = document.getElementById("game-board");
 
   // Programmatically append grids into the container
   for (let i = 0; i < 9; i++) {
@@ -36,8 +36,7 @@ const players = ["O", "X"];
 let turns;
 let currentPlayer;
 let gameState = {};
-let gameStarted = false;
-let gameEnded = false;
+let gameOngoing = false;
 
 const setUp = () => {
   turns = 0;
@@ -52,7 +51,7 @@ const checkIfGridIsEmpty = grid => {
   if (grid.innerHTML === "") {
     return true;
   } else {
-    alert("CHOOOOOSE SOMEWHERE ELSE OIE");
+    changeHeaderMessage("CHOOOOOSE SOMEWHERE ELSE OIE");
     return false;
   }
 };
@@ -74,16 +73,18 @@ const getCurrentPlayer = () => {
 
 // Handles click
 const handleClick = e => {
-  if (gameStarted) {
+  if (gameOngoing) {
     if (checkIfGridIsEmpty(e.target)) {
-      insertMarker(e, getCurrentPlayer());
+      let currentPlayer = getCurrentPlayer();
+      insertMarker(e, currentPlayer);
+      changeHeaderMessage(`It's ${currentPlayer}'s turn!`);
       turns++;
       if (checkWin()) {
-        gameEnded = true;
-        alert("i am a winnah");
+        gameOngoing = false;
+        changeHeaderMessage("i am a winnah");
       } else if (turns === 9) {
-        gameEnded = true;
-        alert("no");
+        gameOngoing = false;
+        changeHeaderMessage("no");
       }
     }
   }
@@ -104,22 +105,35 @@ const checkWin = () => {
   return false;
 };
 
-const changeButtonText = () => {
-  if (gameStarted) {
-    document.getElementById("start-button").innerHTML = "Restart Game";
+const changeToRestartButton = () => {
+  // Change text to Restart Game when game has started
+  if (gameOngoing) {
+    document.getElementById("start-game").innerHTML =
+      '<button id="restart-button" onclick="restartGame()">Restart Game </button>';
   }
 };
 
-const resetGame = () => {
-  // Reset game by setting turns, currentPlayer and gameState           back to their initial state
+const restartGame = () => {
+  // Reset game by setting turns, currentPlayer and gameState back to their initial state
   setUp();
+  changeHeaderMessage("");
+
   // Individual grids should be blank too
+};
+
+const changeHeaderMessage = msg => {
+  document.getElementById("game-message-header").innerHTML = msg;
+};
+
+const changeSidebarMessage = (elem, msg) => {
+  document.querySelector(elem).innerHTML = msg;
 };
 
 // Start new game
 function startGame() {
   // Initialise turns, currentPlayer, and gameState
   setUp();
-  gameStarted = true;
-  changeButtonText();
+  gameOngoing = true;
+  changeToRestartButton();
+  changeHeaderMessage("Game has started!");
 }
