@@ -7,12 +7,8 @@
 
 #game-board {
   display: inline-grid;
-  /* Should change this to something more responsive */
   grid-template-columns: 100px 100px 100px;
   grid-template-rows: 100px 100px 100px;
-  width: 25vw;
-  min-width: 250px;
-  min-height: 250px;
 }
 
 .grid-item {
@@ -24,10 +20,7 @@
 }
 
 #sidebar {
-  width: 200px;
-  height: 500px;
-  border: 1px solid black;
-  border-radius: 15px;
+  /* width: 200px; */
   display: inline-block;
 }
 
@@ -37,6 +30,31 @@
   border: 1px solid black;
 }
 
-#restart-button {
-  /* display: none; */
+#game-announcement-container {
+  height: 40px;
+}
+
+#sidebar {
+  order: 1;
+}
+
+#game-area {
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 426px) {
+  #sidebar div {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  #sidebar {
+    order: 1;
+    margin: 10px 0;
+  }
+
+  #game-board {
+    order: 2;
+  }
 }

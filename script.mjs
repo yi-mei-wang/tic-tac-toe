@@ -1,4 +1,4 @@
-import { dimensions, numOfGrids, players } from "./constants.mjs";
+import { dimensions, initialState, numOfGrids, players } from "./constants.mjs";
 import {
   changeDisplayMessage,
   checkIfGridIsEmpty,
@@ -63,7 +63,10 @@ const handleClick = e => {
       if (checkWin(e, boardState)) {
         gameOngoing = false;
 
-        changeDisplayMessage("#game-announcement-message", "i am a winnah");
+        changeDisplayMessage(
+          "#game-announcement-message",
+          `${currentPlayer} is a winnah`
+        );
       } else if (turns === numOfGrids) {
         gameOngoing = false;
 
