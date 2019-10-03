@@ -20,14 +20,23 @@ body {
 }
 
 .grid-item {
-  border: 4px solid #222831;
   max-width: 150px;
   max-height: 150px;
-  background-color: #c5d86d;
+  background-color: #222831;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.col-1 {
+  border-left: 9px dotted #c5d86d;
+  border-right: 9px dotted #c5d86d;
+}
+
+.row-1 {
+  border-top: 9px dotted #c5d86d;
+  border-bottom: 9px dotted #c5d86d;
 }
 
 #sidebar {
@@ -39,7 +48,7 @@ body {
 #sidebar > div {
   width: 150px;
   height: 150px;
-  border: 4px solid #222831;
+  border: 8px solid #222831;
 }
 
 #game-announcement-container {
