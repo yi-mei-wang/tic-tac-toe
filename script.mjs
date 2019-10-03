@@ -7,35 +7,6 @@ import {
 } from "./gameHelpers.mjs";
 import { checkWin } from "./checkWin.mjs";
 
-window.onload = () => {
-  // Generate the grids on page load
-  // Select the container that contains the grids
-  let gridContainer = document.getElementById("game-board");
-
-  // Programmatically append grids into the container
-  for (let i = 0; i < dimensions; i++) {
-    for (let j = 0; j < dimensions; j++) {
-      let grid = document.createElement("div");
-      grid.classList.add("grid-item");
-
-      grid.setAttribute("data-row", i);
-      grid.setAttribute("data-col", j);
-
-      grid.classList.add(`row-${i}`);
-      grid.classList.add(`col-${j}`);
-
-      grid.addEventListener("click", () => {
-        handleClick(event);
-        // Play some tune onclick
-      });
-
-      gridContainer.appendChild(grid);
-    }
-  }
-
-  startGame();
-};
-
 // GLOBAL VARIABLES
 let turns;
 let currentPlayer;
@@ -110,4 +81,33 @@ const setUp = () => {
   let boardState = Array.from(initialState);
 
   return [turns, currentPlayer, boardState];
+};
+
+window.onload = () => {
+  // Generate the grids on page load
+  // Select the container that contains the grids
+  let gridContainer = document.getElementById("game-board");
+
+  // Programmatically append grids into the container
+  for (let i = 0; i < dimensions; i++) {
+    for (let j = 0; j < dimensions; j++) {
+      let grid = document.createElement("div");
+      grid.classList.add("grid-item");
+
+      grid.setAttribute("data-row", i);
+      grid.setAttribute("data-col", j);
+
+      grid.classList.add(`row-${i}`);
+      grid.classList.add(`col-${j}`);
+
+      grid.addEventListener("click", () => {
+        handleClick(event);
+        // Play some tune onclick
+      });
+
+      gridContainer.appendChild(grid);
+    }
+  }
+
+  startGame();
 };
