@@ -90,8 +90,10 @@ const handleClick = e => {
 function startGame() {
   // Initialise turns, currentPlayer, and boardState
   setUp();
+
   gameOngoing = true;
 
-  changeToRestartButton(gameOngoing);
-  changeDisplayMessage("#game-announcement-message", "Game has started!");
+  document
+    .getElementById("restart-button")
+    .addEventListener("click", restartGame());
 }
