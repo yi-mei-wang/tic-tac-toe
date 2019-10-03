@@ -21,8 +21,8 @@ window.onload = () => {
       grid.setAttribute("data-row", i);
       grid.setAttribute("data-col", j);
 
-      grid.setAttribute("class", `row-${i}`);
-      grid.setAttribute("class", `col-${j}`);
+      grid.classList.add(`row-${i}`);
+      grid.classList.add(`col-${j}`);
 
       grid.addEventListener("click", () => {
         handleClick(event);
@@ -33,7 +33,8 @@ window.onload = () => {
     }
   }
 
-  document.getElementById("start-button").addEventListener("click", startGame);
+  // document.getElementById("start-button").addEventListener("click", startGame);
+  startGame();
 };
 
 // GLOBAL SCOPE
