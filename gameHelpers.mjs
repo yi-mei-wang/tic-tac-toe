@@ -1,4 +1,5 @@
-import { winningCombi } from "./constants.mjs";
+import { initialState, winningCombi } from "./constants.mjs";
+import { numOfGrids } from "./constants.mjs";
 
 export const changeDisplayMessage = (elem, msg) => {
   document.querySelector(elem).innerHTML = msg;
@@ -56,20 +57,65 @@ export const insertMarker = (e, currentPlayer, gameState) => {
 export const checkWin = (gameState, currentPlayer) => {
   // Check if there is a winner
   // Compare current board position with the list of winning combinations
-  if (gameState[currentPlayer].length >= 3) {
-    for (let i = 0; i < winningCombi.length; i++) {
-      console.log(JSON.stringify(gameState[currentPlayer].sort()));
+  // if (gameState[currentPlayer].length >= 3) {
+  //   for (let i = 0; i < winningCombi.length; i++) {
+  //     console.log(JSON.stringify(gameState[currentPlayer].sort()));
 
-      if (
-        JSON.stringify(
-          winningCombi[i].includes(
-            JSON.stringify(gameState[currentPlayer].sort())
-          )
-        )
-      ) {
+  //     if (
+  //       JSON.stringify(
+  //         winningCombi[i].includes(
+  //           JSON.stringify(gameState[currentPlayer].sort())
+  //         )
+  //       )
+  //     ) {
+  //       return true;
+  //     }
+  //   }
+  // }
+
+  let dimensions = Math.sqrt(numOfGrids);
+
+  // Check row (left to right)
+  for (let row = 0; row < dimensions - 1; row++) {
+    for (let col = 0; col < dimensions - 1; col++) {
+      // If the first grid is not currentPlayer's marker, break and go to the next row
+      if (gameState[row][col] !== currentPlayer) {
+        break;
+      } else if (gameState[row][col] !== gameState[row][col + 1]) {
+        // If the current grid and the next grid do not contain the same marker, break
+        break;
+      } else {
         return true;
       }
     }
   }
+
+  // Check column (top to bottom)
+  for (let col = 0; col < dimensions - 1; col++) {
+    for (let row = 0; row < dimensions - 1; row++) {
+      // If the first grid is not currentPlayer's marker, break and go to the next col
+      if (gameState[row][col] !== currentPlayer) {
+        break;
+      } else if (gameState[row][col] !== gameState[row + 1][col]) {
+        // If the current grid and the next grid do not contain the same marker, break
+        break;
+      } else {
+        return true;
+      }
+    }
+  }
+  // Check diag
+  for (let i = 0; i < dimensions - 1; i++) {
+    // If the first grid is not currentPlayer's marker, break and go to the next col
+    if (gameState[i][i] !== currentPlayer) {
+      break;
+    } else if (gameState[i][i] !== gameState[i + 1][i + 1]) {
+      // If the current grid and the next grid do not contain the same marker, break
+      break;
+    } else {
+      return true;
+    }
+  }
+  // Check anti-diag
   return false;
 };
