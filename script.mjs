@@ -1,4 +1,4 @@
-import { players } from "./constants.mjs";
+import { players, numOfGrids } from "./constants.mjs";
 import {
   changeDisplayMessage,
   changeToRestartButton,
@@ -13,13 +13,13 @@ window.onload = () => {
   let gridContainer = document.getElementById("game-board");
 
   // Programmatically append grids into the container
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < numOfGrids; i++) {
     // Pass in the event by passing in 'event' or the DOMElement itself by passing in 'this'
     // gridContainer.innerHTML += `<div class="grid-item" id="${i}" ></div>`;
 
     let grid = document.createElement("div");
     grid.classList.add("grid-item");
-    grid.id = i;
+    grid.value = i;
     grid.addEventListener("click", () => {
       handleClick(event);
       // Play some tune onclick
@@ -73,7 +73,7 @@ const handleClick = e => {
         gameOngoing = false;
 
         changeDisplayMessage("#game-announcement-message", "i am a winnah");
-      } else if (turns === 9) {
+      } else if (turns === numOfGrids) {
         gameOngoing = false;
 
         changeDisplayMessage("#game-announcement-message", "no");
@@ -91,3 +91,10 @@ function startGame() {
   changeToRestartButton(gameOngoing);
   changeDisplayMessage("#game-announcement-message", "Game has started!");
 }
+
+// 1 2 3
+// 4 5 6
+// 7 8 9
+// 00 01 02
+// 10 11 12
+// 20 21 22

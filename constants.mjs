@@ -9,4 +9,8 @@ export const winningCombi = [
   ["2", "4", "6"]
 ];
 
+export const initialState = [["", "", ""], ["", "", ""], ["", "", ""]];
+
 export const players = ["O", "X"];
+
+export const numOfGrids = 9;
