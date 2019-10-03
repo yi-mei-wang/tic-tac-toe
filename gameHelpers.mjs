@@ -1,6 +1,3 @@
-// import { initialState, winningCombi } from "./constants.mjs";
-import { numOfGrids } from "./constants.mjs";
-
 export const changeDisplayMessage = (elem, msg) => {
   document.querySelector(elem).innerHTML = msg;
 };
@@ -10,9 +7,6 @@ export const changeToRestartButton = gameOngoing => {
   if (gameOngoing) {
     let gameControl = document.getElementById("game-control");
 
-    let restartButton = document.createElement("button");
-    restartButton.setAttribute("id", "restart-button");
-    restartButton.innerHTML = "Restart Game";
     restartButton.addEventListener("click", restartGame);
 
     // Replace the start button with the newly created restart button

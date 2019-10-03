@@ -33,11 +33,10 @@ window.onload = () => {
     }
   }
 
-  // document.getElementById("start-button").addEventListener("click", startGame);
   startGame();
 };
 
-// GLOBAL SCOPE
+// GLOBAL VARIABLES
 let turns;
 let currentPlayer;
 let boardState = Array.from(initialState);
@@ -49,13 +48,13 @@ const setUp = () => {
   currentPlayer = players[Math.floor(Math.random() * 2)];
 
   changeDisplayMessage("#current-player", currentPlayer);
+
+  return turns, currentPlayer;
 };
 
 // Switch player so they take turns
 const getCurrentPlayer = () => {
   currentPlayer = turns % 2 === 0 ? "X" : "O";
-  // Update text in current player section
-  document.getElementById("current-player").innerHTML = currentPlayer;
   return currentPlayer;
 };
 
@@ -68,6 +67,7 @@ const handleClick = e => {
       insertMarker(e, currentPlayer, boardState);
 
       turns++;
+
       changeDisplayMessage(
         "#current-player",
         `It's ${getCurrentPlayer()}'s turn!`
@@ -80,7 +80,7 @@ const handleClick = e => {
       } else if (turns === numOfGrids) {
         gameOngoing = false;
 
-        changeDisplayMessage("#game-announcement-message", "no");
+        changeDisplayMessage("#game-announcement-message", "iz a draw");
       }
     }
   }
