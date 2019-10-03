@@ -17,6 +17,7 @@ let gameOngoing = false;
 const handleClick = e => {
   if (gameOngoing) {
     if (checkIfGridIsEmpty(e.currentTarget)) {
+      changeDisplayMessage("#game-announcement-message", "");
       currentPlayer = getCurrentPlayer(turns);
 
       insertMarker(e, currentPlayer, boardState);
