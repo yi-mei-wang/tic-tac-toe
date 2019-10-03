@@ -40,7 +40,7 @@ window.onload = () => {
 // GLOBAL SCOPE
 let turns;
 let currentPlayer;
-let gameState = Array.from(initialState);
+let boardState = Array.from(initialState);
 let gameOngoing = false;
 
 const setUp = () => {
@@ -65,7 +65,7 @@ const handleClick = e => {
     if (checkIfGridIsEmpty(e.target)) {
       let currentPlayer = getCurrentPlayer();
 
-      insertMarker(e, currentPlayer, gameState);
+      insertMarker(e, currentPlayer, boardState);
 
       turns++;
       changeDisplayMessage(
@@ -73,7 +73,7 @@ const handleClick = e => {
         `It's ${getCurrentPlayer()}'s turn!`
       );
 
-      if (checkWin(gameState, currentPlayer)) {
+      if (checkWin(e, boardState)) {
         gameOngoing = false;
 
         changeDisplayMessage("#game-announcement-message", "i am a winnah");
@@ -88,7 +88,7 @@ const handleClick = e => {
 
 // Start new game
 function startGame() {
-  // Initialise turns, currentPlayer, and gameState
+  // Initialise turns, currentPlayer, and boardState
   setUp();
   gameOngoing = true;
 

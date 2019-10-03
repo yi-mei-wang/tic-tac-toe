@@ -14,3 +14,5 @@ export const initialState = [["", "", ""], ["", "", ""], ["", "", ""]];
 export const players = ["O", "X"];
 
 export const numOfGrids = 9;
+
+export const dimensions = 3;
