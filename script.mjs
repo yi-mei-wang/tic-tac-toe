@@ -2,6 +2,7 @@ import { dimensions, initialState, numOfGrids } from "./constants.mjs";
 import {
   changeDisplayMessage,
   checkIfGridIsEmpty,
+  getCurrentPlayer,
   insertMarker,
   restartGame,
   setUp
@@ -42,12 +43,6 @@ let turns;
 let currentPlayer;
 let boardState = Array.from(initialState);
 let gameOngoing = false;
-
-// Switch player so they take turns
-const getCurrentPlayer = () => {
-  currentPlayer = turns % 2 === 0 ? "X" : "O";
-  return currentPlayer;
-};
 
 // Handles click
 const handleClick = e => {

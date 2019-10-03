@@ -49,3 +49,9 @@ export const insertMarker = (e, currentPlayer, boardState) => {
   // Keep track of the current board state
   boardState[parseInt(row)][parseInt(col)] = currentPlayer;
 };
+
+// Switch player so they take turns
+export const getCurrentPlayer = () => {
+  currentPlayer = turns % 2 === 0 ? "X" : "O";
+  return currentPlayer;
+};
