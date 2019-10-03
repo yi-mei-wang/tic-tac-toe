@@ -2,10 +2,13 @@ import { dimensions } from "./constants.mjs";
 
 export const checkWin = (e, boardState) => {
   // Get the data attributes
+  console.log(e);
+  console.log(e.toElement.dataset.row);
+  console.log(e.target);
   let row = parseInt(e.target.dataset.row);
   let col = parseInt(e.target.dataset.col);
 
-  let currentPlayer = e.target.innerHTML;
+  let currentPlayer = e.toElement.children[0].dataset.player;
 
   // If no winner is detected after checking all possible directions, return false
   if (!checkRow(row, currentPlayer, boardState)) {

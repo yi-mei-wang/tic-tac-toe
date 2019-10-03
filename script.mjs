@@ -15,11 +15,8 @@ let gameOngoing = false;
 
 // Main game function
 const handleClick = e => {
-  console.log(turns);
-  console.log(boardState);
-
   if (gameOngoing) {
-    if (checkIfGridIsEmpty(e.target)) {
+    if (checkIfGridIsEmpty(e.currentTarget)) {
       currentPlayer = getCurrentPlayer(turns);
 
       insertMarker(e, currentPlayer, boardState);
