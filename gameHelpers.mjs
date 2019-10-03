@@ -2,7 +2,7 @@ export const changeDisplayMessage = (elem, msg) => {
   document.querySelector(elem).innerHTML = msg;
 };
 
-const restartGame = () => {
+export const restartGame = () => {
   // Reset game by setting turns, currentPlayer and boardState back to their initial state
   setUp();
 

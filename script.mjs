@@ -1,9 +1,9 @@
 import { dimensions, initialState, numOfGrids, players } from "./constants.mjs";
 import {
   changeDisplayMessage,
-  changeToRestartButton,
   checkIfGridIsEmpty,
-  insertMarker
+  insertMarker,
+  restartGame
 } from "./gameHelpers.mjs";
 import { checkWin } from "./checkWin.mjs";
 
@@ -95,5 +95,5 @@ function startGame() {
 
   document
     .getElementById("restart-button")
-    .addEventListener("click", restartGame());
+    .addEventListener("click", restartGame);
 }
