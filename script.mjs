@@ -1,4 +1,4 @@
-import { initialState, numOfGrids, players } from "./constants.mjs";
+import { dimensions, initialState, numOfGrids, players } from "./constants.mjs";
 import {
   changeDisplayMessage,
   changeToRestartButton,
@@ -13,19 +13,26 @@ window.onload = () => {
   let gridContainer = document.getElementById("game-board");
 
   // Programmatically append grids into the container
-  for (let i = 0; i < numOfGrids; i++) {
-    // Pass in the event by passing in 'event' or the DOMElement itself by passing in 'this'
-    // gridContainer.innerHTML += `<div class="grid-item" id="${i}" ></div>`;
+  for (let i = 0; i < dimensions; i++) {
+    for (let j = 0; j < dimensions; j++) {
+      let grid = document.createElement("div");
+      grid.classList.add("grid-item");
 
-    let grid = document.createElement("div");
-    grid.classList.add("grid-item");
-    grid.value = i;
-    grid.addEventListener("click", () => {
-      handleClick(event);
-      // Play some tune onclick
-    });
-    gridContainer.appendChild(grid);
+      grid.setAttribute("data-row", i);
+      grid.setAttribute("data-col", j);
+
+      grid.setAttribute("class", `row-${i}`);
+      grid.setAttribute("class", `col-${j}`);
+
+      grid.addEventListener("click", () => {
+        handleClick(event);
+        // Play some tune onclick
+      });
+
+      gridContainer.appendChild(grid);
+    }
   }
+
   document.getElementById("start-button").addEventListener("click", startGame);
 };
 
