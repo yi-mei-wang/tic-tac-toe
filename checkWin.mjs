@@ -1,3 +1,5 @@
+import { dimensions } from "constants.mjs";
+
 export const checkWinIter = (boardState, currentPlayer) => {
   // Check if there is a winner
   // Compare current board position with the list of winning combinations
@@ -73,31 +75,12 @@ export const checkWin = (e, boardState) => {
   console.log(row);
   console.log(col);
 
-  // To check the row, you would want to move from left to right, i.e. iterate through the col values
-  // Only check the row (left to right) where the click occurred
-  for (let c = 0; c < dimensions; i++) {
-    // Check if each grid contains the currentPlayer's marker
-    // If it doesn't, move on to the next column
-    if (boardState[row][i] !== currentPlayer) {
-      break;
+  if (!checkRow(row)) {
+    if(!checkCol(col)){
+      if(!checkDiag(row))
     }
-
-    // If the loop hasn't broken and c === 2 (i.e., the end of the row, it means that every grid in this current row contained the currentPlayer's marker)
-    if (c === dimensions - 1) {
-      return true;
-    }
-  }
-
-  // Only check the col where the click occurred
-  for (let r = 0; r < dimensions; r++) {
-    if (boardState[r][col] !== currentPlayer) {
-      break;
-    }
-
-    if (r === dimensions - 1) {
-      return true;
-    }
-  }
+  };
+  
 
   // Only check diagonal if row===col
   if (row === col) {
@@ -126,3 +109,37 @@ export const checkWin = (e, boardState) => {
   // If we have not returned true from any of the checks above, we will return false
   return false;
 };
+
+const checkRow = row => {
+  // To check the row, you would want to move from left to right, i.e. iterate through the col values
+  // Only check the row (left to right) where the click occurred
+  for (let c = 0; c < dimensions; i++) {
+    // Check if each grid contains the currentPlayer's marker
+    // If it doesn't, move on to the next column
+    if (boardState[row][i] !== currentPlayer) {
+      break;
+    }
+
+    // If the loop hasn't broken and c === 2 (i.e., the end of the row, it means that every grid in this current row contained the currentPlayer's marker)
+    if (c === dimensions - 1) {
+      return true;
+    }
+  }
+  return false;
+};
+
+const checkCol = col => {
+  // Only check the col where the click occurred
+  for (let r = 0; r < dimensions; r++) {
+    if (boardState[r][col] !== currentPlayer) {
+      break;
+    }
+
+    if (r === dimensions - 1) {
+      return true;
+    }
+  }
+  return false;
+};
+
+
