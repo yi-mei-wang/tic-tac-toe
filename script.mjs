@@ -1,4 +1,4 @@
-import { dimensions, numOfGrids } from "./constants.mjs";
+import { dimensions, numOfGrids, players } from "./constants.mjs";
 import {
   changeDisplayMessage,
   checkIfGridIsEmpty,
@@ -6,7 +6,6 @@ import {
   insertMarker
 } from "./gameHelpers.mjs";
 import { checkWin } from "./checkWin.mjs";
-import { setUp, restartGame } from "./gameSetUp.mjs";
 
 window.onload = () => {
   // Generate the grids on page load
@@ -45,6 +44,9 @@ let gameOngoing = false;
 
 // Main game function
 const handleClick = e => {
+  console.log(turns);
+  console.log(boardState);
+
   if (gameOngoing) {
     if (checkIfGridIsEmpty(e.target)) {
       currentPlayer = getCurrentPlayer(turns);
@@ -82,3 +84,27 @@ function startGame() {
     .getElementById("restart-button")
     .addEventListener("click", restartGame);
 }
+
+const restartGame = () => {
+  // Reset game by setting turns, currentPlayer and boardState back to their initial state
+  [turns, currentPlayer, boardState] = setUp();
+
+  // Clear announcement board
+  changeDisplayMessage("#game-announcement-message", "");
+
+  // Clear the content of individual cells
+  let grids = document.getElementsByClassName("grid-item");
+  for (let i = 0; i < grids.length; i++) {
+    grids[i].innerHTML = "";
+  }
+};
+
+const setUp = () => {
+  let turns = 0;
+
+  let currentPlayer = players[Math.floor(Math.random() * 2)];
+
+  let boardState = Array.from(initialState);
+
+  return [turns, currentPlayer, boardState];
+};
