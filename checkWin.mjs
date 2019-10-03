@@ -75,12 +75,11 @@ export const checkWin = (e, boardState) => {
   console.log(row);
   console.log(col);
 
-
-// If no winner is detected after checking all possible directions, return false
-  if (!checkRow(row)) {
-    if (!checkCol(col)) {
-      if (!checkDiag(row, col)) {
-        if (!checkAntiDiag(row, col)) {
+  // If no winner is detected after checking all possible directions, return false
+  if (!checkRow(row, currentPlayer, boardState)) {
+    if (!checkCol(col, currentPlayer, boardState)) {
+      if (!checkDiag(row, col, currentPlayer, boardState)) {
+        if (!checkAntiDiag(row, col, currentPlayer, boardState)) {
           return false;
         }
       }
@@ -88,25 +87,9 @@ export const checkWin = (e, boardState) => {
   }
 
   return true;
-
-  
-  // Only check anti-diagonal if row+col === 2
-  if (row + col === dimensions - 1) {
-    for (let i = 0; i < dimensions; i++) {
-      if (boardState[i][dimensions - i - 1] !== currentPlayer) {
-        break;
-      }
-
-      if (i === dimensions - 1) {
-        return true;
-      }
-    }
-  }
-  // If we have not returned true from any of the checks above, we will return false
-  return false;
 };
 
-const checkRow = row => {
+const checkRow = (row, currentPlayer, boardState) => {
   // To check the row, you would want to move from left to right, i.e. iterate through the col values
   // Only check the row (left to right) where the click occurred
   for (let c = 0; c < dimensions; i++) {
@@ -124,7 +107,7 @@ const checkRow = row => {
   return false;
 };
 
-const checkCol = col => {
+const checkCol = (col, currentPlayer, boardState) => {
   // Only check the col where the click occurred
   for (let r = 0; r < dimensions; r++) {
     if (boardState[r][col] !== currentPlayer) {
@@ -138,7 +121,7 @@ const checkCol = col => {
   return false;
 };
 
-const checkDiag = (row, col) => {
+const checkDiag = (row, col, currentPlayer, boardState) => {
   // Only check diagonal if row===col
   if (row === col) {
     for (let i = 0; i < dimensions; i++) {
@@ -151,6 +134,19 @@ const checkDiag = (row, col) => {
       }
     }
   }
-}
+};
 
-const checkAntiDiag = (row, col)
+const checkAntiDiag = (row, col, currentPlayer, boardState) => {
+  // Only check anti-diagonal if row+col === 2
+  if (row + col === dimensions - 1) {
+    for (let i = 0; i < dimensions; i++) {
+      if (boardState[i][dimensions - i - 1] !== currentPlayer) {
+        break;
+      }
+
+      if (i === dimensions - 1) {
+        return true;
+      }
+    }
+  }
+};
