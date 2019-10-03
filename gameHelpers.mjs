@@ -51,7 +51,6 @@ export const insertMarker = (e, currentPlayer, boardState) => {
 };
 
 // Switch player so they take turns
-export const getCurrentPlayer = () => {
-  currentPlayer = turns % 2 === 0 ? "X" : "O";
-  return currentPlayer;
+export const getCurrentPlayer = (turns) => {
+  return turns % 2 === 0 ? "X" : "O";
 };

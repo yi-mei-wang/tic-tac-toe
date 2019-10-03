@@ -44,11 +44,11 @@ let currentPlayer;
 let boardState = Array.from(initialState);
 let gameOngoing = false;
 
-// Handles click
+// Main game function
 const handleClick = e => {
   if (gameOngoing) {
     if (checkIfGridIsEmpty(e.target)) {
-      let currentPlayer = getCurrentPlayer();
+      currentPlayer = getCurrentPlayer(turns);
 
       insertMarker(e, currentPlayer, boardState);
 
@@ -56,7 +56,7 @@ const handleClick = e => {
 
       changeDisplayMessage(
         "#current-player",
-        `It's ${getCurrentPlayer()}'s turn!`
+        `It's ${getCurrentPlayer(turns)}'s turn!`
       );
 
       if (checkWin(e, boardState)) {
