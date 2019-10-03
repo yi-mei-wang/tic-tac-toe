@@ -2,9 +2,6 @@ import { dimensions } from "./constants.mjs";
 
 export const checkWin = (e, boardState) => {
   // Get the data attributes
-  console.log(e);
-  console.log(e.toElement.dataset.row);
-  console.log(e.target);
   let row = parseInt(e.target.dataset.row);
   let col = parseInt(e.target.dataset.col);
 
@@ -36,6 +33,10 @@ const checkRow = (row, currentPlayer, boardState) => {
 
     // If the loop hasn't broken and c === 2 (i.e., the end of the row, it means that every grid in this current row contained the currentPlayer's marker)
     if (c === dimensions - 1) {
+      // querySelectorAll allows forEach, while getElementsByTagName
+      document.querySelectorAll(`.row-${row}`).forEach(grid => {
+        grid.style.backgroundColor = "rgba(255, 255, 255, 0.6)";
+      });
       return true;
     }
   }
