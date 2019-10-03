@@ -7,17 +7,15 @@ export const checkIfGridIsEmpty = grid => {
   if (grid.innerHTML === "") {
     return true;
   } else {
-    changeDisplayMessage(
-      "#game-announcement-message",
-      "CHOOOOOSE SOMEWHERE ELSE OIE"
-    );
+    changeDisplayMessage("#game-announcement-message", "OPEN YOUR EYES");
     return false;
   }
 };
 
 // Insert the current player's marker
 export const insertMarker = (e, currentPlayer, boardState) => {
-  e.target.innerHTML = currentPlayer;
+  e.target.innerHTML =
+    currentPlayer === "X" ? "<img src='x.png'/>" : "<img src='o.png'/>";
 
   let row = e.target.dataset.row;
   let col = e.target.dataset.col;

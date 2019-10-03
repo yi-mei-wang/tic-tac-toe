@@ -6,7 +6,8 @@
 }
 
 #game-board {
-  display: inline-grid;
+  /* display: inline-grid; */
+  display: grid;
   grid-template-columns: 100px 100px 100px;
   grid-template-rows: 100px 100px 100px;
 }
@@ -17,25 +18,24 @@
   max-height: 100px;
   background-color: rgba(10, 140, 120, 0.5);
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #sidebar {
-  /* width: 200px; */
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
 }
 
-#sidebar div {
+#sidebar > div {
   width: 100px;
   height: 100px;
   border: 1px solid black;
 }
 
 #game-announcement-container {
-  height: 40px;
-}
-
-#sidebar {
-  order: 1;
+  height: 10vh;
 }
 
 #game-area {
@@ -43,10 +43,17 @@
   flex-wrap: wrap;
 }
 
+#restart-button {
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  border: none;
+  background-color: rgb(79, 26, 165);
+  color: white;
+}
+
 @media (max-width: 426px) {
-  #sidebar div {
-    display: inline-block;
-    vertical-align: top;
+  #sidebar {
+    flex-direction: row;
   }
 
   #sidebar {
