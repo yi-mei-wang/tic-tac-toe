@@ -1,13 +1,12 @@
-import { dimensions, initialState, numOfGrids } from "./constants.mjs";
+import { dimensions, numOfGrids } from "./constants.mjs";
 import {
   changeDisplayMessage,
   checkIfGridIsEmpty,
   getCurrentPlayer,
-  insertMarker,
-  restartGame,
-  setUp
+  insertMarker
 } from "./gameHelpers.mjs";
 import { checkWin } from "./checkWin.mjs";
+import { setUp, restartGame } from "./gameSetUp.mjs";
 
 window.onload = () => {
   // Generate the grids on page load
@@ -41,7 +40,7 @@ window.onload = () => {
 // GLOBAL VARIABLES
 let turns;
 let currentPlayer;
-let boardState = Array.from(initialState);
+let boardState;
 let gameOngoing = false;
 
 // Main game function
@@ -75,7 +74,7 @@ const handleClick = e => {
 // Start new game
 function startGame() {
   // Initialise turns, currentPlayer, and boardState
-  [turns, currentPlayer] = setUp();
+  [turns, currentPlayer, boardState] = setUp();
 
   gameOngoing = true;
 

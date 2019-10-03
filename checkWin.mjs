@@ -6,8 +6,6 @@ export const checkWin = (e, boardState) => {
   let col = parseInt(e.target.dataset.col);
 
   let currentPlayer = e.target.innerHTML;
-  console.log(row);
-  console.log(col);
 
   // If no winner is detected after checking all possible directions, return false
   if (!checkRow(row, currentPlayer, boardState)) {
