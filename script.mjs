@@ -3,9 +3,9 @@ import {
   changeDisplayMessage,
   changeToRestartButton,
   checkIfGridIsEmpty,
-  checkWin,
   insertMarker
 } from "./gameHelpers.mjs";
+import { checkWin } from "./checkWin.mjs";
 
 window.onload = () => {
   // Generate the grids on page load

@@ -1,4 +1,4 @@
-import { dimensions } from "constants.mjs";
+import { dimensions } from "./constants.mjs";
 
 export const checkWinIter = (boardState, currentPlayer) => {
   // Check if there is a winner
@@ -92,10 +92,10 @@ export const checkWin = (e, boardState) => {
 const checkRow = (row, currentPlayer, boardState) => {
   // To check the row, you would want to move from left to right, i.e. iterate through the col values
   // Only check the row (left to right) where the click occurred
-  for (let c = 0; c < dimensions; i++) {
+  for (let c = 0; c < dimensions; c++) {
     // Check if each grid contains the currentPlayer's marker
     // If it doesn't, move on to the next column
-    if (boardState[row][i] !== currentPlayer) {
+    if (boardState[row][c] !== currentPlayer) {
       break;
     }
 

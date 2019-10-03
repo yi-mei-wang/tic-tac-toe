@@ -1,4 +1,4 @@
-import { initialState, winningCombi } from "./constants.mjs";
+// import { initialState, winningCombi } from "./constants.mjs";
 import { numOfGrids } from "./constants.mjs";
 
 export const changeDisplayMessage = (elem, msg) => {
