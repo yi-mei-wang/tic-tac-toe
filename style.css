@@ -3,13 +3,15 @@ body {
   color: #fefefe;
   font-family: "Mansalva", cursive;
   font-size: 20px;
+  height: 90vh;
 }
 
 .wrapper {
-  width: 100vw;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: space-between;
+  justify-content: center;
 }
 
 #game-board {
@@ -89,7 +91,7 @@ img {
   user-select: none;
 }
 
-@media (max-width: 426px) {
+@media (max-width: 500px) {
   #sidebar {
     flex-direction: row;
     order: 1;
