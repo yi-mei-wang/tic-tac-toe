@@ -64,6 +64,11 @@ body {
   padding: 0.6rem;
 }
 
+#restart-button:hover {
+  background-color: #fefefe;
+  color: #f05d23;
+}
+
 @media (max-width: 426px) {
   #sidebar {
     flex-direction: row;
