@@ -75,25 +75,21 @@ export const checkWin = (e, boardState) => {
   console.log(row);
   console.log(col);
 
+
+// If no winner is detected after checking all possible directions, return false
   if (!checkRow(row)) {
-    if(!checkCol(col)){
-      if(!checkDiag(row))
-    }
-  };
-  
-
-  // Only check diagonal if row===col
-  if (row === col) {
-    for (let i = 0; i < dimensions; i++) {
-      if (boardState[i][i] !== currentPlayer) {
-        break;
-      }
-
-      if (i === dimensions - 1) {
-        return true;
+    if (!checkCol(col)) {
+      if (!checkDiag(row, col)) {
+        if (!checkAntiDiag(row, col)) {
+          return false;
+        }
       }
     }
   }
+
+  return true;
+
+  
   // Only check anti-diagonal if row+col === 2
   if (row + col === dimensions - 1) {
     for (let i = 0; i < dimensions; i++) {
@@ -142,4 +138,19 @@ const checkCol = col => {
   return false;
 };
 
+const checkDiag = (row, col) => {
+  // Only check diagonal if row===col
+  if (row === col) {
+    for (let i = 0; i < dimensions; i++) {
+      if (boardState[i][i] !== currentPlayer) {
+        break;
+      }
 
+      if (i === dimensions - 1) {
+        return true;
+      }
+    }
+  }
+}
+
+const checkAntiDiag = (row, col)
