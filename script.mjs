@@ -68,6 +68,8 @@ const restartGame = () => {
   for (let i = 0; i < grids.length; i++) {
     grids[i].innerHTML = "";
   }
+
+  gameOngoing = true;
 };
 
 const setUp = () => {
@@ -75,7 +77,7 @@ const setUp = () => {
 
   let currentPlayer = players[Math.floor(Math.random() * 2)];
 
-  let boardState = Array.from(initialState);
+  let boardState = JSON.parse(initialState);
 
   return [turns, currentPlayer, boardState];
 };

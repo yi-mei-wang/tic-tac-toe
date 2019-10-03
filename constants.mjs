@@ -9,7 +9,11 @@ export const winningCombi = [
   ["2", "4", "6"]
 ];
 
-export const initialState = [["", "", ""], ["", "", ""], ["", "", ""]];
+export const initialState = JSON.stringify([
+  ["", "", ""],
+  ["", "", ""],
+  ["", "", ""]
+]);
 
 export const players = ["O", "X"];
 
