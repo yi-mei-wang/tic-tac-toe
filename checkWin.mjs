@@ -68,6 +68,7 @@ const checkDiag = (row, col, currentPlayer, boardState) => {
       }
     }
   }
+  return false;
 };
 
 const checkAntiDiag = (row, col, currentPlayer, boardState) => {
@@ -83,4 +84,5 @@ const checkAntiDiag = (row, col, currentPlayer, boardState) => {
       }
     }
   }
+  return false;
 };
