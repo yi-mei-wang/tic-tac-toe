@@ -1,5 +1,15 @@
+import { players } from "./constants.mjs";
+
 export const changeDisplayMessage = (elem, msg) => {
   document.querySelector(elem).innerHTML = msg;
+};
+
+export const setUp = () => {
+  let turns = 0;
+
+  let currentPlayer = players[Math.floor(Math.random() * 2)];
+
+  return [turns, currentPlayer];
 };
 
 export const restartGame = () => {

@@ -1,9 +1,10 @@
-import { dimensions, initialState, numOfGrids, players } from "./constants.mjs";
+import { dimensions, initialState, numOfGrids } from "./constants.mjs";
 import {
   changeDisplayMessage,
   checkIfGridIsEmpty,
   insertMarker,
-  restartGame
+  restartGame,
+  setUp
 } from "./gameHelpers.mjs";
 import { checkWin } from "./checkWin.mjs";
 
@@ -42,16 +43,6 @@ let currentPlayer;
 let boardState = Array.from(initialState);
 let gameOngoing = false;
 
-const setUp = () => {
-  turns = 0;
-
-  currentPlayer = players[Math.floor(Math.random() * 2)];
-
-  changeDisplayMessage("#current-player", currentPlayer);
-
-  return turns, currentPlayer;
-};
-
 // Switch player so they take turns
 const getCurrentPlayer = () => {
   currentPlayer = turns % 2 === 0 ? "X" : "O";
@@ -89,7 +80,7 @@ const handleClick = e => {
 // Start new game
 function startGame() {
   // Initialise turns, currentPlayer, and boardState
-  setUp();
+  [turns, currentPlayer] = setUp();
 
   gameOngoing = true;
 
