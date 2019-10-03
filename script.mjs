@@ -1,4 +1,4 @@
-import { players, numOfGrids } from "./constants.mjs";
+import { initialState, numOfGrids, players } from "./constants.mjs";
 import {
   changeDisplayMessage,
   changeToRestartButton,
@@ -32,7 +32,7 @@ window.onload = () => {
 // GLOBAL SCOPE
 let turns;
 let currentPlayer;
-let gameState = {};
+let gameState = Array.from(initialState);
 let gameOngoing = false;
 
 const setUp = () => {
@@ -41,10 +41,6 @@ const setUp = () => {
   currentPlayer = players[Math.floor(Math.random() * 2)];
 
   changeDisplayMessage("#current-player", currentPlayer);
-
-  for (let i = 0; i < players.length; i++) {
-    gameState[players[i]] = [];
-  }
 };
 
 // Switch player so they take turns

@@ -48,8 +48,9 @@ export const checkIfGridIsEmpty = grid => {
 // Insert the current player's marker
 export const insertMarker = (e, currentPlayer, gameState) => {
   e.target.innerHTML = currentPlayer;
+  console.log(e.target.value);
   // Keep track of the current configuration
-  gameState[currentPlayer].push(e.target.id);
+  gameState[parseInt(e.target.value)].push(currentPlayer);
 };
 
 export const checkWin = (gameState, currentPlayer) => {
