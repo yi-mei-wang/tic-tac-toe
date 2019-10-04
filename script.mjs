@@ -50,6 +50,8 @@ const addMarkerPreview = e => {
     let grid = e.currentTarget;
 
     if (checkIfGridIsEmpty(grid)) {
+      // remove any previous messages
+      changeDisplayMessage("#game-announcement-message", "");
       // Show preview
       let img = getCurrentPlayer(turns) === "X" ? "x.png" : "o.png";
       grid.style.backgroundImage = `url(${img})`;

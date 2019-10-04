@@ -35,7 +35,7 @@ const checkRow = (row, currentPlayer, boardState) => {
     if (c === dimensions - 1) {
       // querySelectorAll allows forEach, while getElementsByTagName does not
       document.querySelectorAll(`.row-${row}`).forEach(grid => {
-        grid.style.backgroundColor = "rgba(255, 255, 255, 0.6)";
+        grid.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
       });
       return true;
     }

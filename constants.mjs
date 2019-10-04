@@ -17,6 +17,6 @@ export const initialState = JSON.stringify([
 
 export const players = ["O", "X"];
 
-export const dimensions = 3;
+export const dimensions = 4;
 
-export const numOfGrids = 3 ** 2;
+export const numOfGrids = dimensions ** 2;
