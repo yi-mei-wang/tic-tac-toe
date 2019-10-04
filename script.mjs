@@ -45,6 +45,26 @@ const handleClick = e => {
   }
 };
 
+const addMarkerPreview = e => {
+  if (gameOngoing) {
+    let grid = e.currentTarget;
+
+    if (checkIfGridIsEmpty(grid)) {
+      // Show preview
+      let img = getCurrentPlayer(turns) === "X" ? "x.png" : "o.png";
+      grid.style.backgroundImage = `url(${img})`;
+      grid.style.backgroundRepeat = "no-repeat";
+      grid.style.backgroundPosition = "center";
+    }
+  }
+};
+
+const removeMarkerPreview = e => {
+  if (gameOngoing) {
+    e.currentTarget.style.backgroundImage = "none";
+  }
+};
+
 // Start new game
 function startGame() {
   // Initialise turns, currentPlayer, and boardState
@@ -103,6 +123,14 @@ window.onload = () => {
       grid.addEventListener("click", () => {
         handleClick(event);
         // Play some tune onclick
+      });
+
+      grid.addEventListener("mouseover", () => {
+        addMarkerPreview(event);
+      });
+
+      grid.addEventListener("mouseleave", () => {
+        removeMarkerPreview(event);
       });
 
       gridContainer.appendChild(grid);

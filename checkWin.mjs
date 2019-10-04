@@ -33,7 +33,7 @@ const checkRow = (row, currentPlayer, boardState) => {
 
     // If the loop hasn't broken and c === 2 (i.e., the end of the row, it means that every grid in this current row contained the currentPlayer's marker)
     if (c === dimensions - 1) {
-      // querySelectorAll allows forEach, while getElementsByTagName
+      // querySelectorAll allows forEach, while getElementsByTagName does not
       document.querySelectorAll(`.row-${row}`).forEach(grid => {
         grid.style.backgroundColor = "rgba(255, 255, 255, 0.6)";
       });
