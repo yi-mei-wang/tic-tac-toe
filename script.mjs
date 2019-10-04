@@ -16,33 +16,33 @@ let gameOngoing = false;
 // Main game function
 const handleClick = e => {
   if (gameOngoing) {
-    if (checkIfGridIsEmpty(e.currentTarget)) {
-      changeDisplayMessage("#game-announcement-message", "");
-      currentPlayer = getCurrentPlayer(turns);
+    // if (checkIfGridIsEmpty(e.currentTarget)) {
+    changeDisplayMessage("#game-announcement-message", "");
+    currentPlayer = getCurrentPlayer(turns);
 
-      insertMarker(e, currentPlayer, boardState);
+    insertMarker(e, currentPlayer, boardState);
 
-      turns++;
+    turns++;
+
+    changeDisplayMessage(
+      "#current-player",
+      `It's ${getCurrentPlayer(turns)}'s turn!`
+    );
+
+    if (checkWin(e, boardState)) {
+      gameOngoing = false;
 
       changeDisplayMessage(
-        "#current-player",
-        `It's ${getCurrentPlayer(turns)}'s turn!`
+        "#game-announcement-message",
+        `${currentPlayer} is a winnah`
       );
+    } else if (turns === numOfGrids) {
+      gameOngoing = false;
 
-      if (checkWin(e, boardState)) {
-        gameOngoing = false;
-
-        changeDisplayMessage(
-          "#game-announcement-message",
-          `${currentPlayer} is a winnah`
-        );
-      } else if (turns === numOfGrids) {
-        gameOngoing = false;
-
-        changeDisplayMessage("#game-announcement-message", "iz a draw");
-      }
+      changeDisplayMessage("#game-announcement-message", "iz a draw");
     }
   }
+  // }
 };
 
 const addMarkerPreview = e => {
@@ -122,10 +122,14 @@ window.onload = () => {
       grid.classList.add(`row-${i}`);
       grid.classList.add(`col-${j}`);
 
-      grid.addEventListener("click", () => {
-        handleClick(event);
-        // Play some tune onclick
-      });
+      grid.addEventListener(
+        "click",
+        function() {
+          handleClick(event);
+          // Play some tune onclick
+        },
+        { once: true }
+      );
 
       grid.addEventListener("mouseover", () => {
         addMarkerPreview(event);

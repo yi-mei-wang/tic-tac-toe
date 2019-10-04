@@ -14,13 +14,14 @@ export const checkIfGridIsEmpty = grid => {
 
 // Insert the current player's marker
 export const insertMarker = (e, currentPlayer, boardState) => {
-  e.target.innerHTML =
+  let grid = e.currentTarget;
+  grid.innerHTML =
     currentPlayer === "X"
       ? "<img src='x.png' data-player='X'/>"
       : "<img src='o.png' data-player='O'/>";
 
-  let row = e.target.dataset.row;
-  let col = e.target.dataset.col;
+  let row = grid.dataset.row;
+  let col = grid.dataset.col;
 
   // Keep track of the current board state
   boardState[parseInt(row)][parseInt(col)] = currentPlayer;
